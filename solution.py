@@ -13,13 +13,13 @@ with urllib.request.urlopen(url) as response:
     doc = open("document.txt", "w") # Open a file to write the plain text to
     doc.write(text)                 # and dump the converted text into it
     
-    in_paragraph = False  # We are by default not "inside" of a paragraph yet
-    newline_found = False # Two newlines denote a new paragraph
-    setinel_found = False # Whether or not the $ has been encountered yet
-    found = []            # This will hold all of the paragraphs with a $ in the text
-    start_idx = -1        # Set index to -1 to indicate we aren't inside a paragraph yet
-    end_idx = -1          # Do the same to indicate that we haven't reached the end either
-    para_text = ""        # Holds the text of each paragraph
+    in_paragraph = False   # We are by default not "inside" of a paragraph yet
+    newline_found = False  # Two newlines denote a new paragraph
+    sentinel_found = False # Whether or not the $ has been encountered yet
+    found = []             # This will hold all of the paragraphs with a $ in the text
+    start_idx = -1         # Set index to -1 to indicate we aren't inside a paragraph yet
+    end_idx = -1           # Do the same to indicate that we haven't reached the end either
+    para_text = ""         # Holds the text of each paragraph
     
     # Go through the plain text character by character, adding each
     # character in a paragraph to a string, and if the setinel character
@@ -32,15 +32,15 @@ with urllib.request.urlopen(url) as response:
                 start_idx = i
                 para_text += text[i]
         elif text[i] == '$':
-            setinel_found = True
+            sentinel_found = True
             para_text += text[i]
         elif text[i] == '\n':
             if newline_found:
                 end_idx = i - 1
                 newline_found = False
-                if setinel_found:
+                if sentinel_found:
                     found = found + [{'start': start_idx, 'end': end_idx, 'text': para_text}]
-                setinel_found = False
+                sentinel_found = False
                 start_idx = -1
                 in_paragraph = False
                 para_text = ""
