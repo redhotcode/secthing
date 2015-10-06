@@ -4,17 +4,75 @@
 
 ## 1. APPROACH
 
-My approach to this problem was first to download the appropriate URL, parse the HTML into plain-text using the html2text library (whose output claims to be valid Markdown as well, for further readability). Then, each character in the text was looped-through, scanning for the sentinel character ("$") and remembering the starting and ending character index of each paragraph. The paragraphs found to contain a "$" were added to a list of dictionaries of starting/ending positions as well as the text for each paragraph.
+My refactored approach utilizes libxml2, a C-based XML parsing library, to provide a significantly faster and more efficient solution
+to formatting the SEC filing as text and denoting the paragraphs containing financial information. A generator is used to lazily iterate through all of the "paragraph elements" in the HTML document, and another generator is used to filter these paragraph elements into "target" or financial paragrpahs or simply retreive all of the non-table paragraphs. Filter functions are used to clean up the text and finally methods are provided to save the plain text to a file or dump financial paragraphs to a JSON file.
 
 ## 2. TIME SPENT
 
-Approximately two hours were spent developing this solution.
+Approximately four hours were spent developing this solution.
 
 ## 3. LIBRARIES
 
-html2text 2015.6.21
-urllib (builtin)
-json   (builtin)
+requestcertifi            14.05.14                 py35_0
+decorator                 4.0.2                    py35_0
+flask                     0.10.1                    <pip>
+freetype                  2.5.2                         2
+html2text                 2015.6.21                 <pip>
+ipykernel                 4.0.3                    py35_0
+ipython                   4.0.0                    py35_0
+ipython-genutils          0.1.0                     <pip>
+ipython_genutils          0.1.0                    py35_0
+ipywidgets                4.0.2                    py35_0
+itsdangerous              0.24                      <pip>
+jinja2                    2.8                      py35_0
+jsonschema                2.4.0                    py35_0
+jupyter                   1.0.0                    py35_0
+jupyter-client            4.0.0                     <pip>
+jupyter-console           4.0.2                     <pip>
+jupyter-core              4.0.4                     <pip>
+jupyter_client            4.0.0                    py35_0
+jupyter_console           4.0.2                    py35_0
+jupyter_core              4.0.4                    py35_0
+libpng                    1.6.17                        0
+libsodium                 0.4.5                         0
+lxml                      3.4.4                     <pip>
+markupsafe                0.23                     py35_0
+mistune                   0.7.1                    py35_0
+nbconvert                 4.0.0                    py35_0
+nbformat                  4.0.0                    py35_0
+nbgrader                  0.2.2                     <pip>
+notebook                  4.0.4                    py35_0
+openssl                   1.0.1k                        1
+path.py                   7.6.1                    py35_0
+pexpect                   3.3                      py35_0
+pickleshare               0.5                      py35_0
+pip                       7.1.2                    py35_0
+ptyprocess                0.5                      py35_0
+pygments                  2.0.2                    py35_0
+pyqt                      4.11.3                   py35_0
+python                    3.5.0                         0
+python-dateutil           2.4.2                     <pip>
+python.app                1.2                      py35_4
+pyzmq                     14.7.0                   py35_0
+qt                        4.8.6                         3
+qtconsole                 4.0.1                    py35_0
+readline                  6.2                           2
+requests                  2.8.0                     <pip>
+setuptools                18.1                     py35_0
+simplegeneric             0.8.1                    py35_0
+sip                       4.16.5                   py35_0
+six                       1.9.0                     <pip>
+sqlalchemy                1.0.8                     <pip>
+sqlite                    3.8.4.1                       1
+terminado                 0.5                      py35_0
+tk                        8.5.18                        0
+tornado                   4.2.1                    py35_0
+traitlets                 4.0.0                    py35_0
+werkzeug                  0.10.4                    <pip>
+wheel                     0.24.0                   py35_0
+xz                        5.0.5                         0
+zeromq                    4.0.5                         0
+zlib                      1.2.8                         0
 
 ## 3. RUNNING
 
