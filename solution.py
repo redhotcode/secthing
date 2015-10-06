@@ -1,4 +1,4 @@
-#/usr/bin/env python3.4
+#!/usr/bin/env python
 from lxml import html, etree
 import requests
 import re
@@ -63,8 +63,8 @@ class SECFiling:
 
     def target_paragraphs(self):
         '''Generator yielding only the paragraphs containing a dollar sign ($). Yields dictionaries.'''
-            for p in self.parse_paragraphs():
-                if "$" in p['text']: yield p
+        for p in self.parse_paragraphs():
+            if "$" in p['text']: yield p
                 
     def save_plaintext(self, filename='document.txt'):
         '''Writes the plain text version of the SEC Filing to a text file.'''
